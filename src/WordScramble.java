@@ -13,9 +13,20 @@ public class WordScramble
      *  - two consecutive letters consisting of "A" followed by a letter that was not "A" were swapped
      *  - letters were swapped at most once
      */
-    public static String scrambleWord(String word)
-    {
-        /* to be implemented in part (a) */
+    public static String scrambleWord(String word) {
+        String scramWord = "";
+        for (int i = 0; i < word.length() - 1; i++) {
+            if (word.charAt(i) == 'A' && word.charAt(i + 1) != 'A') {
+                String prevLet = word.substring(i, i + 1);
+                scramWord += word.charAt(i + 1);
+                scramWord += word.charAt(i);
+                i++;
+            }
+            else {
+                scramWord += word.charAt(i);
+            }
+        }
+        return scramWord;
     }
 
     /** Modifies wordList by replacing each word with its scrambled
