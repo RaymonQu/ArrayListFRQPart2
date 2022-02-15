@@ -15,15 +15,19 @@ public class WordScramble
      */
     public static String scrambleWord(String word) {
         String scramWord = "";
-        for (int i = 0; i < word.length() - 1; i++) {
-            if (word.charAt(i) == 'A' && word.charAt(i + 1) != 'A') {
-                String prevLet = word.substring(i, i + 1);
-                scramWord += word.charAt(i + 1);
-                scramWord += word.charAt(i);
-                i++;
+        if(!word.equals(" ")) {
+            for (int i = 0; i < word.length() - 1; i++) {
+                if (word.charAt(i) == 'A' && word.charAt(i + 1) != 'A') {
+                    String prevLet = word.substring(i, i + 1);
+                    scramWord += word.charAt(i + 1);
+                    scramWord += word.charAt(i);
+                    i++;
+                } else {
+                    scramWord += word.charAt(i);
+                }
             }
-            else {
-                scramWord += word.charAt(i);
+            if(scramWord.length() != word.length()) {
+                scramWord += word.charAt(word.length() - 1);
             }
         }
         return scramWord;
@@ -43,6 +47,15 @@ public class WordScramble
      */
     public static void scrambleOrRemove(ArrayList<String> wordList)
     {
-        /* to be implemented in part (b) */
+        for (int i = 0; i < wordList.size(); i++){
+            String scrambledWord = scrambleWord(wordList.get(i));
+            if (wordList.get(i).equals(scrambledWord)){
+                wordList.remove(i);
+                i--;
+            }
+            else {
+                wordList.set(i, scrambleWord(wordList.get(i)));
+            }
+        }
     }
 }
